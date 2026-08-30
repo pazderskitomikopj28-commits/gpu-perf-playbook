@@ -7,6 +7,7 @@ before publishing a result.
 
 - Experiment: [name]
 - Repository and revision: [URL and full commit]
+- Environment snapshot: [JSON path and capture command]
 - Measurement date: [YYYY-MM-DD]
 - GPU / driver / SDK / compiler: [versions]
 - Build configuration and flags: [configuration]
@@ -18,6 +19,7 @@ before publishing a result.
 - Baseline: [reference implementation]
 - Variant: [one controlled change]
 - Warm-up and measured iterations: [counts]
+- Fresh-process repetitions and raw samples: [count and CSV path]
 - Timing method: [CUDA event, wall clock, profiler]
 - Numerical reference and tolerance: [correctness rule]
 
@@ -34,6 +36,11 @@ before publishing a result.
 2. Explanation: [mapping, memory, synchronization, scheduling or math path]
 3. Limitations: [uncontrolled variables and unavailable metrics]
 4. Follow-up experiment: [next falsifiable question]
+
+If this result is used as a regression gate, record whether lower or higher is
+better, the comparison statistic, minimum sample count and allowed percentage.
+The threshold is an engineering policy and should be justified from observed
+noise rather than presented as a significance test.
 
 ## Reproduction
 

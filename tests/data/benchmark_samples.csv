@@ -1,0 +1,6 @@
+benchmark,variant,run,value,unit,correct
+vector_add,baseline,1,10.0,ms,pass
+vector_add,baseline,2,10.2,ms,pass
+vector_add,baseline,3,9.9,ms,pass
+vector_add,baseline,4,10.1,ms,pass
+vector_add,baseline,5,10.0,ms,pass

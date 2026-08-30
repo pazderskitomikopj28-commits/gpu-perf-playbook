@@ -17,6 +17,9 @@ jobs:
       - run: python scripts/roofline.py --flops 2e9 --bytes 8e9 --peak-flops 2e13 --peak-bandwidth 9e11
       - run: python scripts/validate_manifest.py examples/benchmark_manifest.json
       - run: python scripts/parse_ncu_csv.py tests/data/ncu_sample.csv --format json
+      - run: python scripts/benchmark_stats.py summarize tests/data/benchmark_samples.csv --format json
+      - run: python scripts/benchmark_stats.py compare tests/data/benchmark_samples.csv tests/data/benchmark_samples.csv
+      - run: python scripts/capture_environment.py --repository . > environment.json
 
   portable-cpp:
     runs-on: ubuntu-latest
