@@ -17,7 +17,7 @@ namespace portable_backend {
 
 Status scale(TensorView input, TensorView output, float factor) {
   if (input.data == nullptr || output.data == nullptr ||
-      input.elements != output.elements) {
+      input.elements == 0 || input.elements != output.elements) {
     return Status::kInvalidArgument;
   }
   const int blocks = static_cast<int>((input.elements + 255) / 256);
