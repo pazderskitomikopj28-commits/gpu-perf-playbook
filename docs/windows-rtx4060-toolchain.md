@@ -29,8 +29,7 @@ instead of the installed 14.44 toolset.
 | CUDA Toolkit | `D:\DevTools\NVIDIA\CUDA\v12.4` |
 | Nsight Systems, CUDA-bundled | `D:\DevTools\NVIDIA\Nsight-Systems-2023.4.4` |
 | Nsight Systems, current | `D:\DevTools\NVIDIA\Nsight-Systems-2026.4.1` |
-| Nsight Compute, CUDA-bundled | `D:\DevTools\NVIDIA\Nsight-Compute-2024.1.1` |
-| Nsight Compute, driver-matched | `D:\DevTools\NVIDIA\Nsight-Compute-2025.4.1` |
+| Nsight Compute, driver-matched archive | `D:\DevTools\NVIDIA\Nsight-Compute-2025.4.1-driver-matched-archive` |
 | Nsight Compute, current | `D:\DevTools\NVIDIA\Nsight-Compute-2026.2.1` |
 | Downloaded installers/cache | `D:\DevTools\Installers` |
 | Out-of-tree builds | `D:\DevTools\Builds` |
@@ -38,9 +37,11 @@ instead of the installed 14.44 toolset.
 
 The standard CUDA entry at
 `C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA` is a directory junction
-to `D:\DevTools\NVIDIA\CUDA`; the two CUDA-bundled Nsight directories under
-`C:\Program Files\NVIDIA Corporation` are also compatibility junctions to the
-D-drive locations. The pre-existing shared Windows SDK remains under
+to `D:\DevTools\NVIDIA\CUDA`; the CUDA-bundled Nsight Systems directory under
+`C:\Program Files\NVIDIA Corporation` is also a compatibility junction to its
+D-drive location. Nsight Compute 2026.2.1 is the active MSI installation. The
+2025.4.1 directory is a runnable archive retained before the current release's
+major upgrade replaced its registration. The pre-existing shared Windows SDK remains under
 `C:\Program Files (x86)\Windows Kits\10`; it was reused rather than reinstalled.
 Windows Installer and the Visual Studio Installer may retain small system
 registration/cache data on C even though movable application payloads are on D.
@@ -72,7 +73,8 @@ and avoid `LNK4098` static/dynamic CRT conflicts.
   export for the four-stream benchmark. On Windows, the scripts use
   `cuda,nvtx`, `--sample=none` and `--cpuctxsw=none`; WDDM/CPU traces require an
   elevated session. Start the tool from an ASCII-only working directory.
-- Nsight Compute 2024.1.1, 2025.4.1 and 2026.2.1 all exit with Windows status
+- Nsight Compute 2024.1.1 (tested before the later MSI upgrade), archived
+  2025.4.1 and active 2026.2.1 all exit with Windows status
   `0xC0000409` while initializing `--list-sets`; the same happens elevated, before
   any project kernel is launched. No Compute metric is claimed from this host.
   The driver-matched 2025.4.1 release officially recommends driver 591.59 or
@@ -84,6 +86,8 @@ and avoid `LNK4098` static/dynamic CRT conflicts.
   `compute-sanitizer\EnableDebuggerInterface.bat` must be run once as
   administrator on a fresh Windows installation.
 
-The current official profiler pages are
-[Nsight Systems](https://developer.nvidia.com/nsight-systems/get-started) and
+The official profiler pages used here are
+[Nsight Systems](https://developer.nvidia.com/nsight-systems/get-started),
+[current Nsight Compute](https://developer.nvidia.com/tools-overview/nsight-compute/get-started)
+and the driver-matched
 [Nsight Compute 2025.4](https://developer.nvidia.com/tools-overview/nsight-compute/get-started-2025_4).
