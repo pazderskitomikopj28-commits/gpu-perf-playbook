@@ -4,7 +4,7 @@
     {
       "name": "cuda-kernel-lab.reduce_mean_warp",
       "repository": "https://github.com/pazderskitomikopj28-commits/cuda-kernel-lab",
-      "commit": null,
+      "commit": "b080f2cf864cb6d5ef891199cb19362fba040e57",
       "executable": "../cuda-kernel-lab/build/kernel_bench",
       "command": "kernel_bench --op reduce --rows 4096 --cols 4096 --iters 100",
       "inputs": {
@@ -18,14 +18,19 @@
         "metric": "max_abs_error",
         "tolerance": 0.001
       },
-      "measured_on": null,
-      "results_file": null,
-      "notes": "Fill measured_on and results_file only after running on a real GPU."
+      "measured_on": {
+        "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU (compute capability 8.9)",
+        "driver": "591.74",
+        "sdk": "CUDA Toolkit 12.4.131",
+        "compiler": "MSVC 19.38.33145"
+      },
+      "results_file": "benchmarks/rtx4060-laptop-2026-08-30.csv",
+      "notes": "Five fresh-process runs; use P50 because the first cold sample shows clock ramp-up."
     },
     {
       "name": "cuda-stream-pipeline.4_streams",
       "repository": "https://github.com/pazderskitomikopj28-commits/cuda-stream-pipeline",
-      "commit": null,
+      "commit": "14e32d81161bdc657bc6f96136b50ccd1575d725",
       "executable": "../cuda-stream-pipeline/build/stream_pipeline",
       "command": "stream_pipeline --mode all --elements 16777216 --chunks 32 --streams 4 --iters 10",
       "inputs": {
@@ -40,9 +45,14 @@
         "metric": "max_abs_error",
         "tolerance": 0.00001
       },
-      "measured_on": null,
-      "results_file": null,
-      "notes": "Use Nsight Systems to verify overlap before interpreting speedup."
+      "measured_on": {
+        "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU (compute capability 8.9)",
+        "driver": "591.74",
+        "sdk": "CUDA Toolkit 12.4.131",
+        "compiler": "MSVC 19.38.33145"
+      },
+      "results_file": "benchmarks/rtx4060-laptop-2026-08-30.csv",
+      "notes": "Three fresh-process runs; Nsight Systems confirms copy time dominates the small kernel."
     }
   ]
 }

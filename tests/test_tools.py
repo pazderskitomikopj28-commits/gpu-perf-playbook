@@ -56,6 +56,8 @@ class ManifestTests(unittest.TestCase):
                 encoding="utf-8"
             )
         )
+        data["benchmarks"][0]["commit"] = None
+        data["benchmarks"][0]["measured_on"] = None
         data["benchmarks"][0]["results_file"] = "results.csv"
         errors = validator.validate_manifest(data)
         self.assertTrue(any("must be null" in error for error in errors))

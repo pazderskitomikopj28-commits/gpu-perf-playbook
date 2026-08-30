@@ -33,6 +33,7 @@ python .\scripts\validate_manifest.py .\examples\benchmark_manifest.json
 - `portable_backend/`：最小后端接口和 CUDA/SUPA 适配边界示例；
 - `docs/questionnaire-mapping.md`：将工程证据对应到选拔问卷 10 项。
 - `docs/windows-rtx4060-toolchain.md`：RTX 4060 Windows 真机工具链、D 盘路径和已知限制。
+- `benchmarks/rtx4060-laptop-2026-08-30.csv`：带 commit、环境和命令的真机结果。
 
 ## 自动验证
 
@@ -47,6 +48,7 @@ CI 会执行 Python 工具测试、实验清单校验和不依赖厂商 SDK 的 
 
 本机 Windows/RTX 4060 的工具链与路径记录见
 [`docs/windows-rtx4060-toolchain.md`](docs/windows-rtx4060-toolchain.md)。
+跨仓库结果解释见 [`docs/rtx4060-results.md`](docs/rtx4060-results.md)。
 
 ## 证据规范
 
