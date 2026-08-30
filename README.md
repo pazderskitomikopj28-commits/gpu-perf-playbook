@@ -32,6 +32,7 @@ python .\scripts\validate_manifest.py .\examples\benchmark_manifest.json
 - `scripts/roofline.py`：根据 FLOPs、字节数和硬件峰值判断计算/带宽上界；
 - `portable_backend/`：最小后端接口和 CUDA/SUPA 适配边界示例；
 - `docs/questionnaire-mapping.md`：将工程证据对应到选拔问卷 10 项。
+- `docs/windows-rtx4060-toolchain.md`：RTX 4060 Windows 真机工具链、D 盘路径和已知限制。
 
 ## 自动验证
 
@@ -43,6 +44,9 @@ ctest --test-dir build --output-on-failure
 ```
 
 CI 会执行 Python 工具测试、实验清单校验和不依赖厂商 SDK 的 SUPA stub 构建测试。CUDA 后端仍需在安装 CUDA Toolkit 的环境中显式使用 `-DBUILD_CUDA_BACKEND=ON` 构建。
+
+本机 Windows/RTX 4060 的工具链与路径记录见
+[`docs/windows-rtx4060-toolchain.md`](docs/windows-rtx4060-toolchain.md)。
 
 ## 证据规范
 

@@ -15,6 +15,9 @@ target_include_directories(portable_backend PUBLIC
 option(BUILD_CUDA_BACKEND "Build the optional CUDA backend" OFF)
 if(BUILD_CUDA_BACKEND)
   enable_language(CUDA)
+  if(MSVC AND NOT CMAKE_CUDA_RUNTIME_LIBRARY)
+    set(CMAKE_CUDA_RUNTIME_LIBRARY Shared)
+  endif()
   add_library(cuda_backend STATIC portable_backend/src/cuda_backend.cu)
   target_include_directories(cuda_backend PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/portable_backend/include
