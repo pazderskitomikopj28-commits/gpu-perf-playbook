@@ -30,6 +30,15 @@ class CommandResult:
 Runner = Callable[[Sequence[str], Path | None], CommandResult]
 
 
+def decode_command_output(value: bytes) -> str:
+    for encoding in ("utf-8", locale.getpreferredencoding(False)):
+        try:
+            return value.decode(encoding)
+        except UnicodeDecodeError:
+            continue
+    return value.decode(locale.getpreferredencoding(False), errors="backslashreplace")
+
+
 def run_command(command: Sequence[str], cwd: Path | None = None) -> CommandResult:
     executable = shutil.which(command[0])
     if executable is None:
@@ -39,16 +48,15 @@ def run_command(command: Sequence[str], cwd: Path | None = None) -> CommandResul
             [executable, *command[1:]],
             cwd=cwd,
             capture_output=True,
-            text=True,
-            encoding=locale.getpreferredencoding(False),
-            errors="replace",
             timeout=15,
             check=False,
         )
     except (OSError, subprocess.TimeoutExpired) as error:
         return CommandResult(True, None, str(error))
     output = "\n".join(
-        part.strip() for part in (completed.stdout, completed.stderr) if part.strip()
+        decode_command_output(part).strip()
+        for part in (completed.stdout, completed.stderr)
+        if part.strip()
     )
     return CommandResult(True, completed.returncode, output)
 
@@ -169,7 +177,7 @@ def main() -> int:
     if args.output:
         args.output.write_text(rendered, encoding="utf-8")
     else:
-        sys.stdout.write(rendered)
+        sys.stdout.buffer.write(rendered.encode("utf-8"))
     return 0
 
 

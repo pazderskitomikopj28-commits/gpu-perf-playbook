@@ -104,6 +104,11 @@ class BenchmarkStatisticsTests(unittest.TestCase):
 
 
 class EnvironmentCaptureTests(unittest.TestCase):
+    def test_localized_command_output_uses_system_encoding(self) -> None:
+        capture = load_script("capture_environment")
+        encoded = "编译器 19.38".encode(capture.locale.getpreferredencoding(False))
+        self.assertEqual(capture.decode_command_output(encoded), "编译器 19.38")
+
     def test_remote_credentials_are_redacted(self) -> None:
         capture = load_script("capture_environment")
         self.assertEqual(
