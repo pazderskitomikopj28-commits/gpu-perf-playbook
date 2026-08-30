@@ -7,6 +7,7 @@ import argparse
 import csv
 import io
 import json
+import locale
 import os
 import platform
 import shutil
@@ -39,7 +40,7 @@ def run_command(command: Sequence[str], cwd: Path | None = None) -> CommandResul
             cwd=cwd,
             capture_output=True,
             text=True,
-            encoding="utf-8",
+            encoding=locale.getpreferredencoding(False),
             errors="replace",
             timeout=15,
             check=False,
