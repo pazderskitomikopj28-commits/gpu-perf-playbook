@@ -13,16 +13,18 @@ jobs:
         with:
           python-version: '3.x'
       - run: python -m py_compile scripts/*.py
+      - run: python -m unittest discover -s tests -p 'test_*.py' -v
       - run: python scripts/roofline.py --flops 2e9 --bytes 8e9 --peak-flops 2e13 --peak-bandwidth 9e11
       - run: python scripts/validate_manifest.py examples/benchmark_manifest.json
+      - run: python scripts/parse_ncu_csv.py tests/data/ncu_sample.csv --format json
 
   portable-cpp:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Compile the explicit SUPA stub
-        run: >-
-          g++ -std=c++17 -Wall -Wextra -Werror
-          -I portable_backend/include
-          -c portable_backend/src/supa_backend_stub.cpp
-          -o /tmp/supa_backend_stub.o
+      - name: Configure
+        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+      - name: Build
+        run: cmake --build build --parallel
+      - name: Test
+        run: ctest --test-dir build --output-on-failure

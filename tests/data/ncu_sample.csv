@@ -1,0 +1,6 @@
+==PROF== Connected to process 1234
+"ID","Kernel Name","Metric Name","Metric Unit","Metric Value"
+"1","affine_kernel(float const *, float *, size_t)","gpu__time_duration.sum","us","12.0"
+"1","affine_kernel(float const *, float *, size_t)","dram__throughput.avg.pct_of_peak_sustained_elapsed","%","75.0"
+"2","affine_kernel(float const *, float *, size_t)","gpu__time_duration.sum","us","14.0"
+"2","affine_kernel(float const *, float *, size_t)","dram__throughput.avg.pct_of_peak_sustained_elapsed","%","77.0"

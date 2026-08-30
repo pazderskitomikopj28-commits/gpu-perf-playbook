@@ -1,5 +1,7 @@
 # GPU Performance Playbook
 
+[![CI](https://github.com/pazderskitomikopj28-commits/gpu-perf-playbook/actions/workflows/ci.yml/badge.svg)](https://github.com/pazderskitomikopj28-commits/gpu-perf-playbook/actions/workflows/ci.yml)
+
 一套围绕 GPU 性能工程的可复现模板：如何设计 benchmark、用 Nsight Systems/Compute 采集证据、做简单 Roofline 分析，以及为壁仞 BIRENSUPA/br_pytorch 预留清晰的后端适配边界。
 
 这个仓库不上传未经测量的“提升百分比”。`benchmarks/results.schema.csv` 只有字段定义，真实结果应由你在实际 GPU 环境中运行后填写。
@@ -11,6 +13,8 @@ python scripts/roofline.py --flops 2.0e9 --bytes 8.0e9 \
   --peak-flops 20.0e12 --peak-bandwidth 900e9
 
 python scripts/validate_manifest.py examples/benchmark_manifest.json
+
+python scripts/parse_ncu_csv.py tests/data/ncu_sample.csv
 ```
 
 Windows PowerShell：
@@ -24,10 +28,21 @@ python .\scripts\validate_manifest.py .\examples\benchmark_manifest.json
 ## 项目组成
 
 - `scripts/profile_cuda.*`：对 CUDA benchmark 生成 Nsight Systems/Compute 报告；
-- `scripts/parse_ncu_csv.py`：读取 `ncu --csv` 导出的指标，生成稳定的文本摘要；
+- `scripts/parse_ncu_csv.py`：定位 `ncu --page raw --csv` 表头，按 Kernel/Metric 聚合重复采样，输出 Markdown 或 JSON；
 - `scripts/roofline.py`：根据 FLOPs、字节数和硬件峰值判断计算/带宽上界；
 - `portable_backend/`：最小后端接口和 CUDA/SUPA 适配边界示例；
 - `docs/questionnaire-mapping.md`：将工程证据对应到选拔问卷 10 项。
+
+## 自动验证
+
+```bash
+python -m unittest discover -s tests -p 'test_*.py' -v
+cmake -S . -B build
+cmake --build build
+ctest --test-dir build --output-on-failure
+```
+
+CI 会执行 Python 工具测试、实验清单校验和不依赖厂商 SDK 的 SUPA stub 构建测试。CUDA 后端仍需在安装 CUDA Toolkit 的环境中显式使用 `-DBUILD_CUDA_BACKEND=ON` 构建。
 
 ## 证据规范
 

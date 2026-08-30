@@ -2,6 +2,8 @@
 
 #include <cuda_runtime.h>
 
+#include <limits>
+
 namespace {
 
 __global__ void scale_kernel(const float* input, float* output, std::size_t n,
@@ -14,10 +16,13 @@ __global__ void scale_kernel(const float* input, float* output, std::size_t n,
 }  // namespace
 
 namespace portable_backend {
+namespace cuda {
 
-Status scale(TensorView input, TensorView output, float factor) {
+Status scale(ConstTensorView input, TensorView output, float factor) {
   if (input.data == nullptr || output.data == nullptr ||
-      input.elements == 0 || input.elements != output.elements) {
+      input.elements == 0 || input.elements != output.elements ||
+      input.elements >
+          static_cast<std::size_t>(std::numeric_limits<int>::max()) * 256) {
     return Status::kInvalidArgument;
   }
   const int blocks = static_cast<int>((input.elements + 255) / 256);
@@ -27,13 +32,5 @@ Status scale(TensorView input, TensorView output, float factor) {
   return cudaGetLastError() == cudaSuccess ? Status::kOk : Status::kNotAvailable;
 }
 
-const char* status_string(Status status) {
-  switch (status) {
-    case Status::kOk: return "ok";
-    case Status::kNotAvailable: return "not_available";
-    case Status::kInvalidArgument: return "invalid_argument";
-  }
-  return "unknown";
-}
-
+}  // namespace cuda
 }  // namespace portable_backend

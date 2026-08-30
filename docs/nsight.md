@@ -21,7 +21,7 @@ warp is stalled inside a single kernel.
 ## 3. Compute metrics
 
 ```bash
-ncu --set full --kernel-name-base demangled --csv \
+ncu --set basic --page raw --kernel-name-base demangled --csv \
   --log-file reports/kernel_compute.csv ./build/kernel_bench \
   --op reduce --rows 4096 --cols 4096 --iters 3
 ```
@@ -29,6 +29,15 @@ ncu --set full --kernel-name-base demangled --csv \
 Start with achieved memory throughput, arithmetic throughput, occupancy, warp
 stall reasons, branch efficiency and instruction mix. Interpret occupancy as a
 constraint, not a goal: a high occupancy number does not prove high performance.
+Start with `--set basic`; `--set full` can require many replay passes and should
+be used only after the target kernel and question have been narrowed down.
+
+Convert the raw CSV into a reviewable table while preserving the original:
+
+```bash
+python scripts/parse_ncu_csv.py reports/kernel_compute.csv \
+  --output reports/kernel_compute.md
+```
 
 ## 4. Make the claim reproducible
 

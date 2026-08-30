@@ -15,10 +15,22 @@ struct TensorView {
   std::size_t elements = 0;
 };
 
-// This deliberately small interface keeps algorithm code independent from a
-// particular GPU runtime. A real SUPA implementation should be added only
-// after the official SDK, compiler and device semantics are available.
-Status scale(TensorView input, TensorView output, float factor);
+struct ConstTensorView {
+  const void* data = nullptr;
+  std::size_t elements = 0;
+};
+
+// Backend-specific namespaces prevent duplicate symbols when more than one
+// adapter is linked into the same process. The SUPA entry point remains an
+// explicit stub until it can be implemented and tested with the official SDK.
+namespace supa {
+Status scale(ConstTensorView input, TensorView output, float factor);
+}  // namespace supa
+
+namespace cuda {
+Status scale(ConstTensorView input, TensorView output, float factor);
+}  // namespace cuda
+
 const char* status_string(Status status);
 
 }  // namespace portable_backend
