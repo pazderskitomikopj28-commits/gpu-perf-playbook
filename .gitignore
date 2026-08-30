@@ -1,0 +1,9 @@
+reports/
+build/
+__pycache__/
+*.pyc
+*.ncu-rep
+*.nsys-rep
+*.qdrep
+*.sqlite
+.vscode/settings.json
