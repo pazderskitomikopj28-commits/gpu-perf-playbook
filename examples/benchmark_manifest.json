@@ -53,6 +53,33 @@
       },
       "results_file": "benchmarks/rtx4060-laptop-2026-08-30.csv",
       "notes": "Three fresh-process runs; Nsight Systems confirms copy time dominates the small kernel."
+    },
+    {
+      "name": "cuda-inference-kernels.rmsnorm_4096x4096",
+      "repository": "https://github.com/pazderskitomikopj28-commits/cuda-inference-kernels",
+      "commit": "d4a83c8a97d2651a0412344c8e57a59a9533e952",
+      "executable": "../cuda-inference-kernels/build/rmsnorm_bench",
+      "command": "rmsnorm_bench --mode all --rows 4096 --hidden 4096 --block-size 128 --warmup 10 --iters 100",
+      "inputs": {
+        "rows": 4096,
+        "hidden_size": 4096,
+        "dtype": "float32",
+        "block_size": 128
+      },
+      "warmup_iterations": 10,
+      "measured_iterations": 100,
+      "correctness": {
+        "metric": "max_abs_error",
+        "tolerance": 0.0001
+      },
+      "measured_on": {
+        "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU (compute capability 8.9)",
+        "driver": "591.74",
+        "sdk": "CUDA Toolkit 12.4.131",
+        "compiler": "MSVC 19.38.33145"
+      },
+      "results_file": "benchmarks/rtx4060-raw-samples-2026-08-30.csv",
+      "notes": "Five fresh-process runs per variant; 10 warm-up and 100 CUDA-event samples per process; 8192 evenly sampled outputs plus full small-shape tests."
     }
   ]
 }
