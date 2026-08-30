@@ -1,0 +1,62 @@
+{
+  "captured_at_utc": "2026-08-30T15:39:47+00:00",
+  "cuda_paths": {
+    "CUDA_PATH": "D:\\DevTools\\NVIDIA\\CUDA\\v12.4",
+    "CUDA_PATH_V12_4": "D:\\DevTools\\NVIDIA\\CUDA\\v12.4"
+  },
+  "gpus": [
+    {
+      "compute_cap": "8.9",
+      "driver_version": "591.74",
+      "memory.total": "8188",
+      "name": "NVIDIA GeForce RTX 4060 Laptop GPU"
+    }
+  ],
+  "host": {
+    "machine": "AMD64",
+    "os": "Windows",
+    "python": "3.13.5",
+    "release": "11",
+    "version": "10.0.26200"
+  },
+  "repository": {
+    "branch": "main",
+    "commit": "ba4b91551bc4824d590aa9f6a964eb37bdb64430",
+    "dirty": false,
+    "name": "gpu-perf-playbook",
+    "origin": "https://github.com/pazderskitomikopj28-commits/gpu-perf-playbook.git"
+  },
+  "schema_version": 1,
+  "tools": {
+    "cmake": {
+      "available": true,
+      "returncode": 0,
+      "version_output": "cmake version 4.4.3 | CMake suite maintained and supported by Kitware (kitware.com/cmake)."
+    },
+    "git": {
+      "available": true,
+      "returncode": 0,
+      "version_output": "git version 2.53.0.windows.1"
+    },
+    "host_compiler": {
+      "available": true,
+      "returncode": 0,
+      "version_output": "用法: cl [ 选项... ] 文件名... [ /link 链接选项... ] | 用于 x64 的 Microsoft (R) C/C++ 优化编译器 19.38.33145 版 | 版权所有(C) Microsoft Corporation。保留所有权利。"
+    },
+    "ncu": {
+      "available": true,
+      "returncode": 0,
+      "version_output": "NVIDIA (R) Nsight Compute Command Line Profiler | Copyright (c) 2018-2026 NVIDIA Corporation | Version 2026.2.1.0 (build 38286902) (public-release)"
+    },
+    "nsys": {
+      "available": true,
+      "returncode": 0,
+      "version_output": "NVIDIA Nsight Systems version 2026.4.1.191-264138605071v0"
+    },
+    "nvcc": {
+      "available": true,
+      "returncode": 0,
+      "version_output": "nvcc: NVIDIA (R) Cuda compiler driver | Copyright (c) 2005-2024 NVIDIA Corporation | Built on Thu_Mar_28_02:30:10_Pacific_Daylight_Time_2024 | Cuda compilation tools, release 12.4, V12.4.131 | Build cuda_12.4.r12.4/compiler.34097967_0"
+    }
+  }
+}

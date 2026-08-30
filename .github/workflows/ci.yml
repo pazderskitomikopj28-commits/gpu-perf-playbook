@@ -18,6 +18,7 @@ jobs:
       - run: python scripts/validate_manifest.py examples/benchmark_manifest.json
       - run: python scripts/parse_ncu_csv.py tests/data/ncu_sample.csv --format json
       - run: python scripts/benchmark_stats.py summarize tests/data/benchmark_samples.csv --format json
+      - run: python scripts/benchmark_stats.py summarize benchmarks/rtx4060-raw-samples-2026-08-30.csv --format json
       - run: python scripts/benchmark_stats.py compare tests/data/benchmark_samples.csv tests/data/benchmark_samples.csv
       - run: python scripts/capture_environment.py --repository . > environment.json
 

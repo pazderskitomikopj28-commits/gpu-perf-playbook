@@ -44,6 +44,10 @@ python .\scripts\capture_environment.py --repository .
 - `templates/benchmark-report.md`：可复用的实验记录模板；
 - `docs/windows-rtx4060-toolchain.md`：RTX 4060 Windows 真机工具链、D 盘路径和已知限制。
 - `benchmarks/rtx4060-laptop-2026-08-30.csv`：带 commit、环境和命令的真机结果。
+- `benchmarks/environment-rtx4060-2026-08-30.json`：由采集工具从干净提交生成的
+  RTX 4060、D 盘 CUDA/Nsight/MSVC 工具链快照；
+- `benchmarks/rtx4060-raw-samples-2026-08-30.csv`：Graph 和 memory pool 实验的
+  逐进程原始样本，可直接交给统计工具复算；
 - `docs/statistics-and-regression.md`：原始样本格式、分位数口径和回归门限的解释。
 
 ## 自动验证
