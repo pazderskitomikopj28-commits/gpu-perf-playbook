@@ -1,0 +1,19 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug portable backend tests",
+      "type": "cppvsdbg",
+      "request": "launch",
+      "program": "D:/DevTools/Builds/gpu-perf-playbook-vscode-debug/Debug/portable_backend_tests.exe",
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "preLaunchTask": "Build Debug (GPU Performance Playbook)",
+      "stopAtEntry": false,
+      "externalConsole": false,
+      "environment": [
+        { "name": "CUDA_PATH", "value": "D:/DevTools/NVIDIA/CUDA/v12.4" }
+      ]
+    }
+  ]
+}

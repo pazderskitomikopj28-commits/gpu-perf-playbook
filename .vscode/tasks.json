@@ -1,0 +1,24 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build Debug (GPU Performance Playbook)",
+      "type": "shell",
+      "command": "PowerShell.exe",
+      "args": [
+        "-NoProfile", "-ExecutionPolicy", "Bypass", "-File",
+        "${workspaceFolder}/scripts/build_windows.ps1",
+        "-BuildDir", "D:/DevTools/Builds/gpu-perf-playbook-vscode-debug",
+        "-Configuration", "Debug",
+        "-Architecture", "89"
+      ],
+      "problemMatcher": [],
+      "options": {
+        "env": {
+          "TEMP": "D:/DevTools/Builds/_temp",
+          "TMP": "D:/DevTools/Builds/_temp"
+        }
+      }
+    }
+  ]
+}

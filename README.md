@@ -61,6 +61,17 @@ ctest --test-dir build --output-on-failure
 
 CI 会执行 Python 工具测试、实验清单校验和不依赖厂商 SDK 的 SUPA stub 构建测试。CUDA 后端仍需在安装 CUDA Toolkit 的环境中显式使用 `-DBUILD_CUDA_BACKEND=ON` 构建。
 
+## VSCode 开发
+
+仓库包含 `.vscode/launch.json` 和 `tasks.json`。在 Windows 上打开仓库后，Run and
+Debug 中选择 `Debug portable backend tests`，按 F5 会调用
+`scripts/build_windows.ps1`，启用可选 CUDA backend，在
+`D:\DevTools\Builds\gpu-perf-playbook-vscode-debug` 构建 Debug 目标并运行 CTest。
+
+`.devcontainer/devcontainer.json` 提供 CUDA 12.4 GPU 容器配置，并在容器中安装
+Nsight VSCode Edition、C/C++、CMake Tools 和 Python。需要 Docker Desktop 的 WSL2
+GPU 后端。
+
 性能回归命令在超过阈值时返回退出码 1，但阈值只是工程门禁，不等同于统计显著性。
 基线和候选必须来自同一 GPU、功耗模式、工具链与输入；先查看 P95 和 MAD 是否表明
 环境噪声过大，再解释小幅变化。
